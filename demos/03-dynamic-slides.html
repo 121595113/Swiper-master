@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Demo</title>
+		<link rel="stylesheet" href="../dist/idangerous.swiper.css">
+		<style>
+			/* Demo Styles */
+			
+			body {
+				margin: 0;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 13px;
+				line-height: 1.5;
+			}
+			.swiper-container {
+				width: 640px;
+				height: 250px;
+				color: #fff;
+				text-align: center;
+			}
+			.red-slide {
+				background: #ca4040;
+			}
+			.blue-slide {
+				background: #4390ee;
+			}
+			.orange-slide {
+				background: #ff8604;
+			}
+			.green-slide {
+				background: #49a430;
+			}
+			.pink-slide {
+				background: #973e76;
+			}
+			.swiper-slide .title {
+				font-style: italic;
+				font-size: 42px;
+				margin-top: 80px;
+				margin-bottom: 0;
+				line-height: 45px;
+			}
+			.swiper-slide p {
+				font-style: italic;
+				font-size: 25px;
+			}
+			.pagination {
+				position: absolute;
+				z-index: 20;
+				left: 10px;
+				bottom: 10px;
+			}
+			.swiper-pagination-switch {
+				display: inline-block;
+				width: 8px;
+				height: 8px;
+				border-radius: 8px;
+				background: #555;
+				margin-right: 5px;
+				opacity: 0.8;
+				border: 1px solid #fff;
+				cursor: pointer;
+			}
+			.swiper-active-switch {
+				background: #fff;
+			}
+			.swiper-dynamic-links {
+				text-align: center;
+			}
+			.swiper-dynamic-links a {
+				display: inline-block;
+				padding: 5px;
+				border-radius: 3px;
+				border: 1px solid #ccc;
+				margin: 5px;
+				font-size: 12px;
+				text-decoration: none;
+				color: #333;
+				background: #eee;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide blue-slide">
+					<div class="title">Slide 1</div>
+				</div>
+				<div class="swiper-slide red-slide">
+					<div class="title">Slide 2</div>
+				</div>
+				<div class="swiper-slide orange-slide">
+					<div class="title">Slide 3</div>
+				</div>
+				<div class="swiper-slide green-slide">
+					<div class="title">Slide 4</div>
+				</div>
+			</div>
+			<div class="pagination"></div>
+		</div>
+		<p class="swiper-dynamic-links">
+			<a class="sdl-append" href="#">插入</a>
+			<a class="sdl-prepend" href="#">在最前面插入一个</a>
+			<a class="sdl-swap" href="#">交换1和2幻灯片</a>
+			<a class="sdl-insert" href="#">在第一个之后插入</a>
+			<a class="sdl-remove1" href="#">移除第一个</a>
+			<a class="sdl-removel" href="#">移除最后一个</a>
+			<a class="sdl-remove2" href="#">移除第二个</a>
+		</p>
+		<script src="js/jquery-1.10.1.min.js"></script>
+		<script src="../dist/idangerous.swiper.min.js"></script>
+		<script>
+			var mySwiper = new Swiper('.swiper-container', {
+				pagination: '.pagination', //页面标记
+				paginationClickable: true //页面标记是否可以点击
+			})
+
+			/* Dynamic Swiper Links*/
+			function randomColor() {
+				var colors = ('blue red green orange pink').split(' '); //变为数组吗？
+				return colors[Math.floor(Math.random() * colors.length)] //随机生成0到colors.length之间的整数
+			}
+			var count = 4; //初始化数值
+			 //插入
+			$('.sdl-append').click(function(e) {
+				e.preventDefault(); //阻止默认
+				mySwiper.appendSlide('<div class="title">Slide ' + (++count) + '</div>', 'swiper-slide ' + randomColor() + '-slide')
+			});
+			 //在最前面插入一个
+			$('.sdl-prepend').click(function(e) {
+				e.preventDefault();
+				mySwiper.prependSlide('<div class="title">Slide  ' + (++count) + '</div>', 'swiper-slide ' + randomColor() + '-slide')
+			});
+			 //交换1和2幻灯片
+			$('.sdl-swap').click(function(e) {
+				e.preventDefault();
+				mySwiper
+					.getFirstSlide()
+					.insertAfter(1)
+			});
+			 //在第一个之后添加
+			$('.sdl-insert').click(function(e) {
+				e.preventDefault();
+				mySwiper
+					.createSlide('<div class="title">Slide  ' + (++count) + '</div>', 'swiper-slide ' + randomColor() + '-slide')
+					.insertAfter(0)
+			});
+			 //移除第一个
+			$('.sdl-remove1').click(function(e) {
+				e.preventDefault();
+				mySwiper.removeSlide(0)
+			});
+			 //移除最后一个
+			$('.sdl-removel').click(function(e) {
+				e.preventDefault();
+				mySwiper.removeLastSlide()
+			});
+			 //移除第一个
+			$('.sdl-remove2').click(function(e) {
+				e.preventDefault();
+				mySwiper.removeSlide(1)
+			});
+		</script>
+	</body>
+
+</html>
