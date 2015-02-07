@@ -105,9 +105,11 @@
 			var mySwiper = new Swiper('.swiper-container', {
 					pagination: '.pagination', //分页标记
 					loop: true, //循环
-					autoplay:1000,//自动播放，不指定默认不播放，单位为ms
+					speed:1000,
+					autoplay:2000,//自动播放，不指定默认不播放，单位为ms
+					autoplayDisableOnInteraction:false,
 					grabCursor: true, //鼠标变成手
-					paginationClickable: true //分页标记是否可点击
+					paginationClickable: true, //分页标记是否可点击
 				})
 				//向左翻页
 			 $('.arrow-left').on('click', function(e) {
